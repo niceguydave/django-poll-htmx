@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "polls-htmx"
+version = "0.1.0"
+description = "The Django Polls app with htmx added"
+authors = ["David Talbot <david.talbot@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+Django = "^5.1"
+crispy-bootstrap5 = "^2024.2"
+pillow = "^10.4.0"
+django-crispy-forms = "^2.3"
+fontawesomefree = "^6.6.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
