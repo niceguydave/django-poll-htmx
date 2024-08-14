@@ -12,6 +12,7 @@ crispy-bootstrap5 = "^2024.2"
 pillow = "^10.4.0"
 django-crispy-forms = "^2.3"
 fontawesomefree = "^6.6.0"
+django-htmx = "^1.19.0"
 
 
 [build-system]

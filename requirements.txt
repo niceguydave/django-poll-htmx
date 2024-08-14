@@ -1,6 +1,7 @@
 asgiref==3.8.1 ; python_version >= "3.12" and python_version < "4.0"
 crispy-bootstrap5==2024.2 ; python_version >= "3.12" and python_version < "4.0"
 django-crispy-forms==2.3 ; python_version >= "3.12" and python_version < "4.0"
+django-htmx==1.19.0 ; python_version >= "3.12" and python_version < "4.0"
 django==5.1 ; python_version >= "3.12" and python_version < "4.0"
 fontawesomefree==6.6.0 ; python_version >= "3.12" and python_version < "4.0"
 pillow==10.4.0 ; python_version >= "3.12" and python_version < "4.0"

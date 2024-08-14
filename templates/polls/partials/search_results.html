@@ -1,0 +1,23 @@
+{% if polls is not None %}
+  <div class="search-result-count">
+      {{polls|length}}
+      {{polls|length|pluralize:"result,results"}}
+  </div>
+{% endif %}
+
+{% if errors %}
+    {% for error in errors %}
+        <p class="error">{{ error }}</p>
+    {% endfor %}
+{% endif %}
+
+<div class="container">
+  {% for poll in polls %}
+    <div class="row search-result-row">
+      <div class="search-result">
+        <a href="{% url 'polls:detail' poll.id %}"
+          >{{ poll.question_text }}</a>
+      </div>
+    </div>
+  {% endfor %}
+</div>

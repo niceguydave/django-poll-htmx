@@ -67,6 +67,21 @@ files = [
 django = ">=4.2"
 
 [[package]]
+name = "django-htmx"
+version = "1.19.0"
+description = "Extensions for using Django with htmx."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django_htmx-1.19.0-py3-none-any.whl", hash = "sha256:875a642814e52278c1728842436beda2001847a493ab79fd82da3fb46ead140f"},
+    {file = "django_htmx-1.19.0.tar.gz", hash = "sha256:e7e17304e78e07f96eca0affc3ce1806edfdf3538bb7cb1912452b101f3e627d"},
+]
+
+[package.dependencies]
+asgiref = ">=3.6"
+django = ">=3.2"
+
+[[package]]
 name = "fontawesomefree"
 version = "6.6.0"
 description = "Font Awesome Free"
@@ -202,4 +217,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "9124d9b7838deab3e00d0221dbdf998a59d0c000cc5fe19004dd4a1c4e605814"
+content-hash = "e6c1fa0fe4a96d7ff3111f243e7bd6ba1e3775ca3a212820bebcc57f5750e3ae"

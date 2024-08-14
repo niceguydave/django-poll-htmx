@@ -91,4 +91,8 @@ def search(request):
         "polls": results,
         "errors": errors,
     }
+
+    if request.htmx:
+        return render(request, "polls/partials/search_results.html", data)
+
     return render(request, "polls/search.html", data)
