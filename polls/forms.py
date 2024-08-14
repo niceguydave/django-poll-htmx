@@ -13,7 +13,5 @@ class SearchForm(forms.Form):
         search_text = self.cleaned_data["search_text"].lower()
         for word in self.BLOCKED_WORDS:
             if word in search_text:
-                raise forms.ValidationError(
-                    f"'{word}' has been identified as an unhelpful word."
-                )
+                raise forms.ValidationError(f"Dude, don't say '{word}'.")
         return search_text
