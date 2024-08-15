@@ -78,11 +78,13 @@ footer a:hover {
     margin: 10px;
 }
 
-h4.poll-question {
-    padding-bottom: 20px;
+h1.poll-question {
+    padding-bottom: 40px;
 }
-h4.poll-question a {
+h1.poll-question a {
+    font-size: 72px;
     color: black;
+    margin-bottom: 144px;
 }
 
 .recents {

@@ -145,6 +145,23 @@ class QuestionIndexViewTests(TestCase):
             [question2, question1],
         )
 
+    def test_pagination(self):
+        # Create more questions to test pagination
+        for i in range(4):
+            create_question(question_text=f"Question {i}")
+
+        response = self.client.get(reverse("polls:index"))
+        self.assertEqual(len(response.context["question_list"]), 3)
+        self.assertTrue(response.context["is_paginated"])
+
+    def test_invalid_page_integer(self):
+        response = self.client.get(reverse("polls:index") + "?page=999")
+        self.assertEqual(response.status_code, 404)
+
+    def test_invalid_page_number_type(self):
+        response = self.client.get(reverse("polls:index") + "?page=obviouslynotanumber")
+        self.assertEqual(response.status_code, 404)
+
 
 class QuestionModelTests(TestCase):
     def test_was_published_recently_with_future_question(self):
