@@ -1,0 +1,18 @@
+{% for question in question_list %}
+    <h1 class="poll-question">
+        <a href="{% url 'polls:detail' question.id %}">
+            {{ question.question_text }}
+        </a>
+    </h1>
+{% endfor %}
+
+{% if is_paginated %}
+{% if page_obj.has_next %}
+    <div class="scroll-trigger htmx-settling"
+        hx-get="{% url 'polls:index' %}?page={{ page_obj.next_page_number }}"
+        hx-trigger="revealed"
+        hx-swap="outerHTML">
+        <img src="/static/img/bars.svg" width="150px" class="htmx-indicator">
+    </div>
+{% endif %}
+{% endif %}

@@ -1,10 +1,11 @@
 import datetime
 
-from django.test import TestCase
+from django.test import RequestFactory, TestCase
 from django.urls import reverse
 from django.utils import timezone
 
 from .models import Question
+from .views import search as search_view
 
 
 def create_question(question_text, days=0):
@@ -17,27 +18,74 @@ def create_question(question_text, days=0):
     return Question.objects.create(question_text=question_text, pub_date=time)
 
 
+class HTMXQuestionSearchViewTests(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        create_question(question_text="This is a test question")
+        create_question(question_text="Another question about cats")
+
+    def test_htmx_request_uses_partial_template(self):
+        url = reverse("polls:search")
+        request = self.factory.get(url, {"search_text": "test"})
+        request.htmx = True  # Simulate an HTMX request
+
+        with self.assertTemplateUsed("polls/partials/search_results.html"):
+            response = search_view(request)
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_non_htmx_request_uses_full_template(self):
+        url = reverse("polls:search")
+        request = self.factory.get(url, {"search_text": "test"})
+        request.htmx = False  # Simulate a non-HTMX request
+
+        with self.assertTemplateUsed("polls/search.html"):
+            response = search_view(request)
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_htmx_request_contains_partial_content(self):
+        url = reverse("polls:search")
+        request = self.factory.get(url, {"search_text": "test"})
+        request.htmx = True  # Simulate an HTMX request
+
+        response = search_view(request)
+
+        self.assertContains(response, "This is a test question")
+        self.assertNotContains(response, "Another question about cats")
+
+    def test_non_htmx_request_contains_full_content(self):
+        url = reverse("polls:search")
+        request = self.factory.get(url, {"search_text": "test"})
+        request.htmx = False  # Simulate a non-HTMX request
+
+        response = search_view(request)
+
+        self.assertContains(response, "This is a test question")
+        self.assertNotContains(response, "Another question about cats")
+
+
 class QuestionSearchViewTests(TestCase):
 
-    def test_healthy_response(self):
-        response = self.client.get(reverse("polls:search"))
-        self.assertEqual(response.status_code, 200)
+    def setUp(self):
+        create_question(question_text="This is a test question")
+        create_question(question_text="Another question about cats")
 
-    def test_match_question(self):
-        """
-        If the search matches a question, ensure that question is returned
-        """
-        create_question(question_text="This is a match.")
-
-        search_term = "a match"
+    def test_valid_search(self):
         url = reverse("polls:search")
-        response = self.client.get(url, {"search_text": search_term})
-
-        # Now you can assert things about the response
+        response = self.client.get(url, {"search_text": "test question"})
         self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, '<p class="error">')
+        self.assertContains(response, "This is a test question")
+        self.assertContains(response, "Another question about cats")
 
-        # Check if the search term is in the response content
-        self.assertContains(response, search_term)
+    def test_search_with_blocked_word(self):
+        url = reverse("polls:search")
+        response = self.client.get(url, {"search_text": "🫤"})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '<p class="error">')
+        self.assertNotContains(response, "This is a test question")
+        self.assertNotContains(response, "Another question about cats")
 
 
 class QuestionIndexViewTests(TestCase):
@@ -96,6 +144,23 @@ class QuestionIndexViewTests(TestCase):
             response.context["latest_question_list"],
             [question2, question1],
         )
+
+    def test_pagination(self):
+        # Create more questions to test pagination
+        for i in range(4):
+            create_question(question_text=f"Question {i}")
+
+        response = self.client.get(reverse("polls:index"))
+        self.assertEqual(len(response.context["question_list"]), 3)
+        self.assertTrue(response.context["is_paginated"])
+
+    def test_invalid_page_integer(self):
+        response = self.client.get(reverse("polls:index") + "?page=999")
+        self.assertEqual(response.status_code, 404)
+
+    def test_invalid_page_number_type(self):
+        response = self.client.get(reverse("polls:index") + "?page=obviouslynotanumber")
+        self.assertEqual(response.status_code, 404)
 
 
 class QuestionModelTests(TestCase):
