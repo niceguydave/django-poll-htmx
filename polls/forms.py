@@ -5,9 +5,7 @@ class SearchForm(forms.Form):
     search_text = forms.CharField(max_length=20, required=True)
 
     # Predefined list of blocked words
-    BLOCKED_WORDS = [
-        "🫤",
-    ]
+    BLOCKED_WORDS = ["🫤", "spam"]
 
     def clean_search_text(self):
         search_text = self.cleaned_data["search_text"].lower()
