@@ -15,7 +15,7 @@ from .models import Choice, Question
 class IndexView(generic.ListView):
     template_name = "polls/index.html"
     context_object_name = "latest_question_list"
-    paginate_by = 3
+    paginate_by = 2
 
     def get_queryset(self):
         """
@@ -39,6 +39,14 @@ class IndexView(generic.ListView):
             questions = paginator.page(paginator.num_pages)
 
         context["question_list"] = questions
+
+        if self.request.htmx:
+            # Adding a sleep statement so that we can actually see the partial loading
+            import time
+
+            time.sleep(2)
+            self.template_name = "polls/partials/index_results.html"
+
         return context
 
 
