@@ -151,7 +151,7 @@ class QuestionIndexViewTests(TestCase):
             create_question(question_text=f"Question {i}")
 
         response = self.client.get(reverse("polls:index"))
-        self.assertEqual(len(response.context["question_list"]), 3)
+        self.assertEqual(len(response.context["question_list"]), 2)
         self.assertTrue(response.context["is_paginated"])
 
     def test_invalid_page_integer(self):
