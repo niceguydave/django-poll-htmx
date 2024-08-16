@@ -1,4 +1,4 @@
-# Django Poll App with HTMX
+# Django Polls App with HTMX
 
 This is a simple poll application using the [Django polls tutorial](https://docs.djangoproject.com/en/5.1/intro/tutorial01/) 
 and enhancing it with [HTMX](https://htmx.org/) for a better, more dynamic user experience. 
