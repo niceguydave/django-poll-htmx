@@ -61,6 +61,10 @@ Make sure you have the following installed:
 - **Vote in Polls:** Users can vote in the polls directly on the poll detail pages. The results will be updated dynamically thanks to HTMX.
 - **View Results:** Results are shown immediately after voting, providing real-time feedback without requiring a page refresh.
 
+## Testing
+The standard Django test suite is being used at present.
+To verify that the tests work, run `python manage.py test`
+
 ## Contributing
 
 Contributions are welcome! To contribute:
