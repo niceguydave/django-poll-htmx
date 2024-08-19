@@ -63,7 +63,8 @@ Make sure you have the following installed:
 
 ## Testing
 The standard Django test suite is being used at present.
-To verify that the tests work, run `python manage.py test`
+To verify that the tests work, run `python manage.py test`.
+The status of the tests running in the GitHub CI/CD Action is https://github.com/niceguydave/django-polls-htmx/workflows/Django%20CI%2FCD/badge.svg
 
 ## Contributing
 
