@@ -9,6 +9,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      DJANGO_POLLS_SECRET_KEY: ${{ secrets.DJANGO_POLLS_SECRET_KEY }}
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python
