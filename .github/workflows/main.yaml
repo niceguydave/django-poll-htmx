@@ -1,10 +1,12 @@
-name: Django CI/CD
+name: Run tests with coverage
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - '**'  # This wildcard matches all branches
   pull_request:
-    branches: [ main ]
+    branches:
+      - '**'  # This ensures coverage runs on PRs from any branch
 
 jobs:
   test:
@@ -22,4 +24,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Run tests
-      run: python manage.py test
+      run: |
+        coverage run manage.py test
+        coverage report --fail-under=80
