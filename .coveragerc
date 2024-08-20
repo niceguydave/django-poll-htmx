@@ -1,0 +1,10 @@
+[run]
+source = polls, polls_htmx
+omit =
+    */migrations/*
+    */tests/*
+    asgi.py
+    wsgi.py
+
+[report]
+fail_under = 80
