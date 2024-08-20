@@ -1,5 +1,5 @@
 [run]
-source = polls, polls_htmx
+source = .
 omit =
     */migrations/*
     */tests/*
