@@ -27,3 +27,5 @@ jobs:
       run: |
         coverage run manage.py test
         coverage report --fail-under=80
+    - name: Report coverage to coveralls.io
+      uses: coverallsapp/github-action@v2
