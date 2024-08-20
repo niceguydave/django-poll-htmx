@@ -1,4 +1,4 @@
-![Tests](https://github.com/niceguydave/django-polls-htmx/workflows/Django%20CI%2FCD/badge.svg)
+![Tests](https://github.com/niceguydave/django-polls-htmx/workflows/Run%20tests%20with%20coverage/badge.svg)
 
 # Django Polls App with HTMX
 
