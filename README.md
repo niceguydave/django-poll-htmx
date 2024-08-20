@@ -1,3 +1,5 @@
+![Tests](https://github.com/niceguydave/django-polls-htmx/workflows/Django%20CI%2FCD/badge.svg)
+
 # Django Polls App with HTMX
 
 This is a simple poll application using the [Django polls tutorial](https://docs.djangoproject.com/en/5.1/intro/tutorial01/) 
@@ -63,7 +65,8 @@ Make sure you have the following installed:
 
 ## Testing
 The standard Django test suite is being used at present.
-To verify that the tests work, run `python manage.py test`
+
+To verify that the tests work, run `python manage.py test`.
 
 ## Contributing
 
