@@ -1,4 +1,5 @@
 ![Tests](https://github.com/niceguydave/django-polls-htmx/workflows/Run%20tests%20with%20coverage/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/niceguydave/django-polls-htmx/badge.svg?branch=main)](https://coveralls.io/github/niceguydave/django-polls-htmx?branch=main)
 
 # Django Polls App with HTMX
 
