@@ -164,6 +164,10 @@ class QuestionIndexViewTests(TestCase):
 
 
 class QuestionModelTests(TestCase):
+    def test_model_str(self):
+        question = create_question(question_text="Good question")
+        assert question.__str__() == "Good question"
+
     def test_was_published_recently_with_future_question(self):
         """
         was_published_recently() returns False for questions whose pub_date
