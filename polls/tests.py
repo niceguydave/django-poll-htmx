@@ -4,7 +4,7 @@ from django.test import RequestFactory, TestCase
 from django.urls import reverse
 from django.utils import timezone
 
-from .models import Question
+from .models import Question, Choice
 from .views import search as search_view
 
 
@@ -216,3 +216,10 @@ class QuestionDetailViewTests(TestCase):
         url = reverse("polls:detail", args=(past_question.id,))
         response = self.client.get(url)
         self.assertContains(response, past_question.question_text)
+
+
+class ChoiceModelTests(TestCase):
+    def test_model_str(self):
+        question = create_question(question_text="Good question")
+        choice = Choice(question=question, choice_text="Good answer", votes=0)
+        assert choice.__str__() == "Good answer"
