@@ -15,6 +15,7 @@ fontawesomefree = "^6.6.0"
 django-htmx = "^1.19.0"
 coveralls = "^4.0.1"
 coverage = "^7.6.1"
+psycopg2 = "^2.9.9"
 
 
 [build-system]
