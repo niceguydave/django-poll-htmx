@@ -1,5 +1,6 @@
 import urllib
 
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import F, Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
@@ -14,15 +15,32 @@ from .models import Choice, Question
 class IndexView(generic.ListView):
     template_name = "polls/index.html"
     context_object_name = "latest_question_list"
+    paginate_by = 2
 
     def get_queryset(self):
         """
-        Return the last five published questions (not including those set to be
-        published in the future).
+        Return as many questions as set by `self.paginate_by`
+        (not including those set to be published in the future).
         """
         return Question.objects.filter(pub_date__lte=timezone.now()).order_by(
             "-pub_date"
-        )[:5]
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        list_questions = self.get_queryset()
+        paginator = Paginator(list_questions, self.paginate_by)
+        page = self.request.GET.get("page")
+        try:
+            questions = paginator.page(page)
+        except PageNotAnInteger:
+            questions = paginator.page(1)
+        except EmptyPage:
+            questions = paginator.page(paginator.num_pages)
+
+        context["question_list"] = questions
+
+        return context
 
 
 class DetailView(generic.DetailView):
