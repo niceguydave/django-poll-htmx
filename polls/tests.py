@@ -66,7 +66,6 @@ class HTMXQuestionSearchViewTests(TestCase):
 
 
 class QuestionSearchViewTests(TestCase):
-
     def setUp(self):
         create_question(question_text="This is a test question")
         create_question(question_text="Another question about cats")
