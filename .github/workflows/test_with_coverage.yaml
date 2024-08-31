@@ -28,7 +28,7 @@ jobs:
           - 5432:5432
     env:
       DJANGO_POLLS_SECRET_KEY: shh_tell_noone_this_is_serious
-      DJANGO_POLLS_DB_NAME: github_actions
+      DJANGO_POLLS_DB_NAME: test_db
       DJANGO_POLLS_DB_USER: postgres
       DJANGO_POLLS_DB_PASSWORD: postgres
       DJANGO_POLLS_DB_HOST: 127.0.0.1
