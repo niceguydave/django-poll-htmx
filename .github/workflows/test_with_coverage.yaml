@@ -1,12 +1,9 @@
 name: Run tests with coverage
 
 on:
-  push:
-    branches:
-      - '**'  # This wildcard matches all branches
   pull_request:
     branches:
-      - 'main'
+      - "*"
 
 jobs:
   test:

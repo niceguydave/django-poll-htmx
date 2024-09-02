@@ -1,13 +1,9 @@
 name: Ruff (An extremely fast Python linter and code formatter)
 
 on:
-  push:
-    branches:
-      - '**'
   pull_request:
     branches:
-      - main
-      - develop
+      - "*"
 
 jobs:
   ruff:
